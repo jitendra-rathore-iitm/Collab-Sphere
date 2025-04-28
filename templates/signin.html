@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Sign in{% endblock %}
+
+{% block content%}
+    <div class = "container-fluid">
+        <div class = "container">
+            <div class = " login">
+                <div class = "m-3 text-center">
+                    <h1>Sign in</h1>
+                </div>
+                <div class = "m-3 text-center">
+                    <form>
+                        <label>Email</label><br>
+                        <input class = "m-4 text-center box" type = "email" placeholder = "Email" /><br>
+                        <label>Password</label><br>
+                        <input class = "m-4 text-center box" type = "password" placeholder = "Password"/><br>
+                        <input class = "btn btn-outline-primary me-5" type = "button" value = "Submit" >
+                        <a href = "" class = "link">Sign up</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
