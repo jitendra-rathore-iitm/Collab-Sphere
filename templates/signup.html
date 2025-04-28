@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Sign Up{% endblock %}
+{% block head %}
+    <style>
+        input[type="date"]{
+            color-scheme: light;
+
+        }
+        
+    </style>
+{% endblock%}
+
+{% block content%}
+    <div class = "container-fluid">
+        <div class = "container">
+            <div class = " login">
+                <div class = "m-3 text-center">
+                    <h1>Sign Up</h1>
+                </div>
+                <div class = "m-3 text-center">
+                    <form>
+                        <label>Name</label><br>
+                        <input class = "m-3 text-center box" type = "text" placeholder = "Name" /><br>
+                        <label>Email</label><br>
+                        <input class = "m-3 text-center box" type = "email" placeholder = "Email"/><br>
+                        <label>Password</label><br>
+                        <input class = "m-3 text-center box" type = "password" placeholder = "Password"/><br>
+                        <label>DOB</label><br/>
+                        <input class = "m-3 text-center box" type = "date"><br>
+                        <input class = "btn btn-outline-primary me-5" type = "button" value = "Register" >
+                        <a href = "" class = "link">Sign in</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
