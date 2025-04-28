@@ -4,7 +4,7 @@ app = Flask(__name__, template_folder = "../templates", static_folder = "../stat
 
 @app.route("/")
 def home():
-    return "Hello World"
+    return render_template("index.html")
 
 @app.route("/signin")
 def index():
@@ -13,3 +13,11 @@ def index():
 @app.route("/signup")
 def signup():
     return render_template("signup.html")
+
+@app.route("/admin/home")
+def admin_home():
+    return render_template("admin_home.html")
+
+@app.route("/user/home")
+def user_home():
+    return render_template("user_home.html")
