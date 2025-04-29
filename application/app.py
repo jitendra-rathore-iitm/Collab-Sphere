@@ -21,3 +21,9 @@ def admin_home():
 @app.route("/user/home")
 def user_home():
     return render_template("user_home.html")
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
