@@ -1,41 +1,21 @@
-from flask import Flask, render_template, url_for, redirect, request
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
+from flask_migrate import Migrate
 
 app = Flask(__name__, template_folder = "../templates", static_folder = "../static")
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///testdb.sqlite3'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = 'ehdyrfgsjfhbjgiddhow'
 
-@app.route("/")
-def home():
-    return render_template("index.html")
+db = SQLAlchemy(app)
+migarate = Migrate(app, db)
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
 
-@app.route("/signin")
-def index():
-    return render_template("signin.html")
+from application import model, routes
 
-@app.route("/signup")
-def signup():
-    return render_template("signup.html")
 
-@app.route("/admin/home")
-def admin_home():
-    return render_template("admin_home.html")
-
-@app.route("/user/home")
-def user_home():
-    return render_template("user_home.html")
-
-@app.route("/admin/about")
-def about():
-    return render_template("admin_about.html")
-
-@app.route("/admin/dashboard")
-def admin_dashboard():
-    return render_template("admin_dashboard.html")
-
-@app.route("/user/dashboard")
-def user_dashboard():
-    return render_template("user_home.html")
-
-@app.route("/user/about")
-def user_about():
-    return render_template("user_about.html")
 
 

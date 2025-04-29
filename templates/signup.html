@@ -21,17 +21,26 @@
                     <h1>Sign Up</h1>
                 </div>
                 <div class = "m-3 text-center">
-                    <form>
+                    <form method = "POST" action = "{{ url_for('signup') }}">
                         <label>Name</label><br>
-                        <input class = "m-3 text-center box" type = "text" placeholder = "Name" /><br>
+                        <input class = "m-3 text-center box" type = "text" placeholder = "Name" name = "name" required/><br>
                         <label>Email</label><br>
-                        <input class = "m-3 text-center box" type = "email" placeholder = "Email"/><br>
+                        <input class = "m-3 text-center box" type = "email" placeholder = "Email" name = "email" required/><br>
                         <label>Password</label><br>
-                        <input class = "m-3 text-center box" type = "password" placeholder = "Password"/><br>
-                        <label>DOB</label><br/>
-                        <input class = "m-3 text-center box" type = "date"><br>
-                        <input class = "btn btn-outline-primary me-5" type = "button" value = "Register" >
-                        <a href = "" class = "link">Sign in</a>
+                        <input class = "m-3 text-center box" type = "password" placeholder = "Password" name = "password" required/><br>
+
+                        <label>Gender</label><br/><br/>
+                        <div class="btn-group" role="group" aria-label="Gender">
+                            <input type="radio" class="btn-check rounded-5" value = "Male" id = "gender_male" name = "gender"  autocomplete="off" required>
+                            <label class="btn btn-outline-primary" for = "gender_male" >Male</label><br>
+                            <input type="radio" class="btn-check rounded-5" value = "Female" id = "gender_female" name = "gender" autocomplete="off">
+                            <label class="btn btn-outline-primary" for = "gender_female" >Female</label><br>
+                            <input type="radio" class="btn-check rounded-5" value = "Other" id = "gender_other" name = "gender" autocomplete="off">
+                            <label class="btn btn-outline-primary" for = "gender_other">Other</label><br>
+                        </div>
+                        <br/><br/>
+                        <input class = "btn btn-outline-primary me-5" type = "submit" value = "Register"  >
+                        <a href = "{{ url_for('signin') }}" class = "link">Sign in</a>
                     </form>
                 </div>
             </div>
