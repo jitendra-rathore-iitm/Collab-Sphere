@@ -5,36 +5,6 @@
 {% block head%}
     <style>
 
-        .blurfle{
-            background-color: #4DB7FF;
-            border: 3px solid white;
-            border-radius: 30px;
-            margin-top: 30px;
-            margin-left: 240px;
-            width: 800px;
-            height: 60px;
-            
-        }
-        a:hover{
-            background-color: grey;
-            transition-duration: 1s;
-            border-radius: 30px;
-        }
-        .krindale{
-            color: black;
-            background-color: azure;
-            height:200px;
-            border-radius: 30px;
-           
-        }
-        .ros{
-            border:2px solid white;
-            border-radius: 30px;
-            height:50px;
-            width:fit-content;
-            padding: 10px 10px 10px 10px;
-            margin: 0px 30px 30px 30px;
-        }
         
         
         
@@ -45,15 +15,15 @@
     <section class = "container-fluid">
         <div class = "container">
             <div class="blurfle">
-                <ul class = "nav justify-content-center">
+                <ul class = "nav justify-content-center nav-underline">
                     <li class = "nav-item py-2">
-                        <a class = "nav-link " href = "" style = "color: rgb(29, 7, 61);">Home</a>
+                        <a class = "nav-link active" href = "/templates/admin_home.html" style = "color: rgb(29, 7, 61);">Home</a>
                     </li>
                     <li class = "nav-item py-2">
-                        <a class = "nav-link " href = "" style = "color: rgb(29, 7, 61);">Dashboard</a>
+                        <a class = "nav-link " href = "/templates/admin_dashboard.html" style = "color: rgb(29, 7, 61);">Dashboard</a>
                     </li>
                     <li class = "nav-item py-2">
-                        <a class = "nav-link " href = "" style = "color: rgb(29, 7, 61);">About</a>
+                        <a class = "nav-link " href = "/templates/admin_about.html" style = "color: rgb(29, 7, 61);">About</a>
                     </li>
                     <li class = "nav-item py-2">
                         <a class = "nav-link " href = "" style = "color: rgb(29, 7, 61);">Logout</a>

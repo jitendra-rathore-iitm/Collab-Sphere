@@ -22,8 +22,20 @@ def admin_home():
 def user_home():
     return render_template("user_home.html")
 
-@app.route("/about")
+@app.route("/admin/about")
 def about():
-    return render_template("about.html")
+    return render_template("admin_about.html")
+
+@app.route("/admin/dashboard")
+def admin_dashboard():
+    return render_template("admin_dashboard.html")
+
+@app.route("/user/dashboard")
+def user_dashboard():
+    return render_template("user_home.html")
+
+@app.route("/user/about")
+def user_about():
+    return render_template("user_about.html")
 
 

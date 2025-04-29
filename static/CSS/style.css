@@ -55,3 +55,25 @@ body{
 
 }
 
+.blurfle{
+    background-color: #4DB7FF;
+    border: 3px solid white;
+    border-radius: 30px;
+    margin-top: 30px;
+    margin-left: 240px;
+    width: 800px;
+    height: 60px;
+    
+}
+
+.ros{
+    border:2px solid white;
+    border-radius: 30px;
+    height:50px;
+    width:fit-content;
+    padding: 10px 10px 10px 10px;
+    margin: 0px 30px 30px 30px;
+}
+
+
+
