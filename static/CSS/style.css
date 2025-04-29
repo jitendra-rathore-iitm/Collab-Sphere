@@ -34,3 +34,24 @@ body{
     margin-top: 70px;
 }
 
+.john{
+    border:10px solid #4DB7FF;
+    border-radius: 350px;
+    width:250px;
+    
+}
+
+.krindale{
+    color: black;
+    background-color: azure;
+    height:200px;
+    border-radius: 30px;
+   
+}
+
+.bor{
+    border: 5px solid #4DB7FF ;
+    border-radius: 30px;
+
+}
+
