@@ -26,6 +26,9 @@
                         <input class = "m-3 text-center box" type = "text" placeholder = "Name" name = "name" required/><br>
                         <label>Email</label><br>
                         <input class = "m-3 text-center box" type = "email" placeholder = "Email" name = "email" required/><br>
+                        {% if error %}
+                            <p class = "text-danger">{{ error }}</p>
+                        {% endif %}
                         <label>Password</label><br>
                         <input class = "m-3 text-center box" type = "password" placeholder = "Password" name = "password" required/><br>
 

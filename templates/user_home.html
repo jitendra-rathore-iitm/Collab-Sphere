@@ -16,9 +16,9 @@
     <section class = "container-fluid">
         <div class = "container">
             <div class="blurfle">
-                <ul class = "nav justify-content-center">
+                <ul class = "nav justify-content-center nav-underline">
                     <li class = "nav-item py-2">
-                        <a class = "nav-link " href = "/templates/user_home.html" style = "color: rgb(29, 7, 61);">Home</a>
+                        <a class = "nav-link active" href = "/templates/user_home.html" style = "color: rgb(29, 7, 61);">Home</a>
                     </li>
                     <li class = "nav-item py-2">
                         <a class = "nav-link " href = "/templates/user_dashboard.html" style = "color: rgb(29, 7, 61);">Dashboard</a>
@@ -27,7 +27,7 @@
                         <a class = "nav-link " href = "/templates/user_about.html" style = "color: rgb(29, 7, 61);">About</a>
                     </li>
                     <li class = "nav-item py-2">
-                        <a class = "nav-link " href = "" style = "color: rgb(29, 7, 61);">Logout</a>
+                        <a class = "nav-link " href = "{{ url_for('logout') }}" style = "color: rgb(29, 7, 61);">Logout</a>
                     </li>
 
                     <div class = "position-absolute end-0 pe-3 ros " >
