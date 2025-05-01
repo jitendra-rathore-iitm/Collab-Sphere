@@ -254,6 +254,30 @@ def interested_show():
     return render_template("interest.html", interested = interested)
 
 
+@app.route("/discussion/<int:project_id>", methods=["GET", "POST"])
+@login_required
+def discussion(project_id):
+    user = current_user
+    project = Projects.query.get_or_404(project_id)
+
+    if request.method == "POST":
+        message = request.form.get("message")
+        if not message:
+            flash("Message cannot be empty.", "danger")
+        else:
+            new_message = Discussion(message=message, user_id=user.id, project_id=project.id)
+            db.session.add(new_message)
+            db.session.commit()
+            flash("Comment added!", "success")
+            return redirect(url_for('discussion', project_id=project.id))
+
+    comments = Discussion.query.filter_by(project_id=project.id).all()
+    return render_template("discussion.html", project=project, comments=comments)
+
+
+    
+
+
     
 
 

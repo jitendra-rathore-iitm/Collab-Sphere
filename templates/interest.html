@@ -41,7 +41,7 @@
                         <b>
                             <img src = "/static/images/cyber.jpeg" style = "width:33px; border-radius:30px;">
                             
-                            <a href = "" style = "color: white;" class = "link"> Welcome, </a> </b>
+                            <a href = "" style = "color: white;" class = "link"> Welcome </a> </b>
                            
                     </div>
                 
@@ -62,7 +62,10 @@
                             {% for interest in interested %}
                             <tr class = "text-center">
                                 {%if interest.project %}
-                                    <td>{{ interest.project.title }}</td>
+                                    <td><a href = "{{ url_for('discussion', project_id=interest.project.id) }}" class = "link">
+                                            {{ interest.project.title }}
+                                        </a>
+                                    </td>
                                     <td>{{ interest.project.description }}</td>
                                     <td>{{ interest.project.skills }}</td>
 
