@@ -9,16 +9,16 @@
         <div class="blurfle">
             <ul class = "nav justify-content-center nav-underline">
                 <li class = "nav-item py-2">
-                    <a class = "nav-link " href = "/templates/admin_home.html" style = "color: rgb(29, 7, 61);">Home</a>
+                    <a class = "nav-link " href = "{{ url_for('admin_home') }}" style = "color: rgb(29, 7, 61);"><img src = "/static/images/house-solid.svg" class = "m-1" style = "width:17px"/>Home</a>
                 </li>
                 <li class = "nav-item py-2">
-                    <a class = "nav-link active " href = "/templates/admin_dashboard.html" style = "color: rgb(29, 7, 61);">Dashboard</a>
+                    <a class = "nav-link active " href = "{{ url_for('admin_dashboard') }}" style = "color: rgb(29, 7, 61);"><img src = "/static/images/chart-simple-solid.svg" class = "m-1" style = "width : 17px">Dashboard</a>
                 </li>
                 <li class = "nav-item py-2">
-                    <a class = "nav-link " href = "/templates/admin_about.html" style = "color: rgb(29, 7, 61);">About</a>
+                    <a class = "nav-link " href = "{{ url_for('admin_about') }}" style = "color: rgb(29, 7, 61);"><img src = "/static/images/user-solid.svg"  class = "m-1" style = "width : 17px">About</a>
                 </li>
                 <li class = "nav-item py-2">
-                    <a class = "nav-link " href = "{{ url_for('logout') }}" style = "color: rgb(29, 7, 61);">Logout</a>
+                    <a class = "nav-link " href = "{{ url_for('logout') }}" style = "color: rgb(29, 7, 61);"><img src = "/static/images/right-to-bracket-solid.svg" class = "m-1" style = "width : 17px">Logout</a>
                 </li>
                 
                     <div class = "position-absolute end-0 pe-3 ros " >
@@ -29,6 +29,51 @@
                     </div>
                 
             </ul>
+        </div>
+
+        <div>
+            <h1 class = "text-center m-5">User Details</h1>
+            <br>
+            <hr/>
+            {% if users %}
+        
+                
+                
+                    <table class = "table table-dark table-striped-columns">
+                        <tr class = "text-center">
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Email ID</th>
+                            <th>Gender</th>
+                            <th>Action</th>
+                        </tr>
+                        {% for user in users %}
+                        <tr class = "text-center">
+                            <td> {{ user.id }}</td>
+                            <td> {{ user.name }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.gender }}</td>
+                            <td>
+                                {% if not user.is_blocked%}
+                                    <a href = "" class = "link btn btn-outline-primary">Block</a>
+                                {% else %}
+                                    <p class = "text-danger">You are already blocked</p>
+                                {% endif %}
+
+                            
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                        
+            {% else %}
+                {{ "User Not available "}}
+            {% endif %}
+
+        </div>
+
+
+
         </div>
 
 {% endblock %}

@@ -11,16 +11,16 @@
                 <div class="blurfle">
                     <ul class = "nav justify-content-center nav-underline">
                         <li class = "nav-item py-2">
-                            <a class = "nav-link " href = "/templates/admin_home.html" style = "color: rgb(29, 7, 61);">Home</a>
+                            <a class = "nav-link " href = "{{ url_for('admin_home') }}" style = "color: rgb(29, 7, 61);"><img src = "/static/images/house-solid.svg" class = "m-1" style = "width:17px"/>Home</a>
                         </li>
                         <li class = "nav-item py-2">
-                            <a class = "nav-link  " href = "/templates/admin_dashboard.html" style = "color: rgb(29, 7, 61);">Dashboard</a>
+                            <a class = "nav-link  " href = "{{ url_for('admin_dashboard') }}" style = "color: rgb(29, 7, 61);"><img src = "/static/images/chart-simple-solid.svg" class = "m-1" style = "width : 17px">Dashboard</a>
                         </li>
                         <li class = "nav-item py-2">
-                            <a class = "nav-link active" href = "/templates/admin_about.html" style = "color: rgb(29, 7, 61);">About</a>
+                            <a class = "nav-link active" href = "{{ url_for('admin_about') }}" style = "color: rgb(29, 7, 61);"><img src = "/static/images/user-solid.svg"  class = "m-1" style = "width : 17px">About</a>
                         </li>
                         <li class = "nav-item py-2">
-                            <a class = "nav-link " href = "" style = "color: rgb(29, 7, 61);">Logout</a>
+                            <a class = "nav-link " href = "{{ url_for('logout') }}" style = "color: rgb(29, 7, 61);"><img src = "/static/images/right-to-bracket-solid.svg" class = "m-1" style = "width : 17px">Logout</a>
                         </li>
                         
                             <div class = "position-absolute end-0 pe-3 ros " >
@@ -61,95 +61,7 @@
             </div>
 
             <br/><br/><hr>
-            <div class = "row row-cols-3 p-3">
-                <div class = "col  ">
-                    <div class = "p-5">
-                        <div class = "p-5">
-                            <div class = "p-5">
-                                <div >
-                                    <img src = "/static/images/Python-logo-notext.svg.png" class = "img-fluid p-3 ">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             
-
-                <div class = "col  ">
-                    <div class = "p-5">
-                        <div class = "p-5">
-                            <div class = "p-5">
-                                <div >
-                                    <img src = "https://download.logo.wine/logo/Java_(programming_language)/Java_(programming_language)-Logo.wine.png" class = "img-fluid p-3">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class = "col  ">
-                    <div class = "p-5">
-                        <div class = "p-5">
-                            <div class = "p-5">
-                                <div >
-                                    <img src = "/static/images/sql.jpeg" class = "img-fluid p-3">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class = "col  ">
-                    <div class = "p-5">
-                        <div class = "p-5">
-                            <div class = "p-5">
-                                <div >
-                                    <img src = "/static/images/flask.jpeg" class = "img-fluid p-3">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class = "col  ">
-                    <div class = "p-5">
-                        <div class = "p-5">
-                            <div class = "p-5">
-                                <div >
-                                    <img src = "/static/images/html.png" class = "img-fluid p-3">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class = "col  ">
-                    <div class = "p-5">
-                        <div class = "p-5">
-                            <div class = "p-5">
-                                <div >
-                                    <img src = "/static/images/css.png" class = "img-fluid p-3">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class = "col  ">
-                    <div class = "p-5">
-                        <div class = "p-5">
-                            <div class = "p-5">
-                                <div >
-                                    <img src = "https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo-shadow@2x.png" class = "img-fluid p-3">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-
-
-            </div>
 
             <footer >
                 <div class = "text-center krindale p-3 m-3" >

@@ -1,8 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from application.app import app, db, login_manager
-from application.model import Users
+from application.model import Users, Projects, Interest, Discussion
 
 def init_db():
     with app.app_context():
@@ -20,9 +20,11 @@ def init_db():
 def load_user(user_id):
     return Users.query.get(int(user_id))
 
+
 @app.route("/")
 def index():
     return render_template("index.html")
+
 
 @app.route("/signup", methods = ["GET", "POST"])
 def signup():
@@ -45,7 +47,6 @@ def signup():
     return render_template("signup.html")
 
     
-
 @app.route("/signin", methods = ["GET", "POST"])
 def signin():
     if request.method == "POST":
@@ -56,15 +57,14 @@ def signin():
             login_user(user)
             flash("You logged successfully", "success")
             if user.is_admin:
-                return redirect(url_for("admin_dashboard"))
+                return redirect(url_for("admin_home"))
             else:
-                return redirect(url_for('user_dashboard'))
+                return redirect(url_for('user_home'))
         else:
             flash("Password is incorrect", "error")
             return render_template("signin.html")
         
     return render_template("signin.html")
-
 
 
 @app.route("/logout")
@@ -73,12 +73,120 @@ def logout():
     logout_user()
     return redirect(url_for("index"))
 
-
-@app.route("/admin/dashboard")
-def admin_dashboard():
+#<----------------------Admin endpoints---------------------------->
+@app.route("/admin/home")
+@login_required
+def admin_home():
     return render_template("admin_home.html")
 
+
+@app.route("/admin/dashboard")
+@login_required
+def admin_dashboard():
+    users = Users.query.all()
+    return render_template("admin_dashboard.html", users = users)
+
+
+@app.route("/admin/about")
+@login_required
+def admin_about():
+    return render_template("admin_about.html")
+
+
+
+#<---------------------------------User endpoints-------------------------->
+@app.route("/user/home")
+@login_required
+def user_home():
+    user = current_user
+    return render_template("user_home.html", user = user)
+
 @app.route("/user/dashboard")
+@login_required
 def user_dashboard():
-    return render_template("user_home.html")
+    user = current_user
+    project = Projects.query.all()
+    return render_template("user_dashboard.html", projects = project, user = user)
+
+
+skills = ['Python', 'Java', 'JavaScript', 'C++', 'C#', 'HTML', 'CSS', 'SQL', 'React', 'Vue.js', 'Angular',
+    'Node.js', 'Flask', 'Django', 'Machine Learning', 'Deep Learning', 'Artificial Intelligence', 
+    'Blockchain', 'Cloud Computing', 'Docker', 'Kubernetes', 'DevOps', 'Git', 'GitHub', 'Linux', 
+    'MongoDB', 'MySQL', 'PostgreSQL', 'TensorFlow', 'PyTorch', 'Data Science', 'Statistics', 'Excel',
+    'AWS', 'Azure', 'Google Cloud', 'Swift', 'Kotlin', 'Rust', 'Ruby', 'PHP', 'Firebase', 'Sass', 
+    'Tailwind CSS', 'Bootstrap', 'TypeScript', 'GraphQL', 'Web Development', 'Mobile App Development',
+    'Game Development', 'VR/AR', 'UI/UX Design', 'UI Design', 'UX Research', 'Software Testing', 
+    'Automation Testing', 'Cybersecurity', 'Ethical Hacking', 'SEO', 'Digital Marketing']
+
+@app.route("/user/show", methods = ["GET"])
+@login_required
+def user_show():
+    user = current_user
+    project = Projects.query.filter_by(users_id = user.id).all()
+    return render_template("user_show.html", projects = project, user = user)
+    
+
+@app.route("/user/add", methods = ["GET", "POST"])
+@login_required
+def user_add():
+    user = current_user
+    if request.method == "POST":
+        title = request.form['title']
+        description = request.form['description']
+        selected_skills = request.form.getlist('skills')
+        skills_str = ",".join(selected_skills)
+        if Projects.query.filter_by(title=title).first():
+            flash("Project title already exists. Please choose a different", "danger")
+            return render_template("user_add.html", skills=skills, user=user)
+        if not title or not description or not skills:
+            flash("All fields are required", "danger")
+            return render_template("user_add.html", skills = skills, user = user)
+        new_project = Projects(title = title, description = description, skills = skills_str, users_id = user.id )
+        db.session.add(new_project)
+        db.session.commit()
+        flash("Your Project added successfully", 'success')
+        return redirect(url_for('user_add'))
+    return render_template("user_add.html", skills = skills, user = user)
+
+@app.route("/user/delete", methods = ["POST"])
+@login_required
+def user_delete():
+    project_id = request.form.get("project_id")
+    if not project_id:
+        flash("No project specified.", "danger")
+        return redirect(url_for("user_show"))
+    project = Projects.query.filter_by(id=project_id, users_id=current_user.id).first()
+    if not project:
+        flash("No project found to delete.", "warning")
+        return redirect(url_for('user_show'))
+    db.session.delete(project)
+    db.session.commit()
+    flash("Project Deleted successfully", 'success')
+    return redirect(url_for('user_show'))
+    
+
+@app.route("/user/update/<int:project_id>", methods = ["GET", "POST"])
+@login_required
+def user_update(project_id):
+    user = current_user
+    project = Projects.query.filter(Projects.id == project_id, Projects.users_id == user.id).first()
+    if request.method == "POST":
+        project.title = request.form['title']
+        project.description = request.form['description']
+        project.skills = ",".join(request.form.getlist('skills'))
+        db.session.commit()
+        flash("Poject Updated Successfully", "success")
+        return redirect(url_for('user_show'))
+    return render_template('user_update.html', project = project, skills = skills, user = user)
+
+
+
+@app.route("/user/about")
+@login_required
+def user_about():
+    user = current_user
+    return render_template("user_about.html", user = user)
+
+
+
 

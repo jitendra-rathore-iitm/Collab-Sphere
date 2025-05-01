@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title%}Update Projects{% endblock %}
+
+{% block content %}
+
+<section class = "container-fluid">
+    <div class = "container">
+        <div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show mt-3" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        <div class="blurfle">
+            <ul class = "nav justify-content-center nav-underline">
+                <li class = "nav-item py-2">
+                    <a class = "nav-link " href = "{{ url_for('user_home') }}" style = "color: rgb(29, 7, 61);"><img src = "/static/images/house-solid.svg" class = "m-1" style = "width:17px"/>Home</a>
+                </li>
+                <li class = "nav-item py-2">
+                    <a class = "nav-link  " href = "{{ url_for('user_dashboard') }}" style = "color: rgb(29, 7, 61);"><img src = "/static/images/chart-simple-solid.svg" class = "m-1" style = "width:17px"/>Dashboard</a>
+                </li>
+                <li class = "nav-item py-2">
+                    <a class = "nav-link active " href = "{{ url_for('user_add') }}" style = "color: rgb(29, 7, 61);"><img src = "/static/images/plus-solid.svg" class = "m-1" style = "width:17px"/>Add</a>
+                </li>
+                <li class = "nav-item py-2">
+                    <a class = "nav-link " href = "{{ url_for('user_about') }}" style = "color: rgb(29, 7, 61);"><img src = "/static/images/user-solid.svg" class = "m-1" style = "width:17px"/>About</a>
+                </li>
+                <li class = "nav-item py-2">
+                    <a class = "nav-link " href = "{{ url_for('logout') }}" style = "color: rgb(29, 7, 61);"><img src = "/static/images/right-to-bracket-solid.svg" class = "m-1" style = "width:17px"/>Logout</a>
+                </li>
+                
+                    <div class = "position-absolute end-0 pe-3 ros " >
+
+                        <b>
+                            <img src = "/static/images/cyber.jpeg" style = "width:33px; border-radius:30px;">
+                            
+                            <a href = "" style = "color: white;" class = "link"> Welcome, {{ user.name }}</a> </b>
+                            
+                    </div>
+                
+            </ul>
+        </div>
+        <div  class = "m-5 text-center">
+            <form method="POST" action="{{ url_for('user_update', project_id = project.id ) }}">
+                <label class = "fs-3">Title</label><br/><br/>
+                <input type="text" name="title" value="{{ project.title }}" class = "border border-info-subtle border-3 rounded-4 form-control w-100 " required><br/><br/>
+                <label class = "fs-3">Description</label><br/><br/>
+                <textarea name="description" class = "border border-info-subtle border-3 rounded-4 form-control w-100 " rows = "7" cols = "50">{{ project.description }} </textarea><br/><br/>
+                <!-- Assuming skills is a list of options -->
+                {% for skill in skills %}
+                    <input type="checkbox" name="skills" value="{{ skill }}" class = "m-2 "
+                        {% if skill in project.skills %}checked{% endif %}> {{ skill }}
+                {% endfor %}
+                <br/><br/>
+                <button type="submit" class = "btn btn-outline-primary">Update</button>
+            </form>
+        </div>
+
+        <footer >
+            <div class = "text-center krindale p-3 m-3" >
+             <p>Social Media</p>
+             <a href = "https://github.com/jitendra-rathore-iitm" style = "color: rgb(29, 7, 61);" class = "link">
+                 <img src = "/static/images/github.png" style = "width: 20px; ">
+                 Github
+             </a>
+             <a href = "https://www.linkedin.com/in/jitendrarathore-/" style = "color: rgb(29, 7, 61);" class = "link">
+                 <img src = "/static/images/linkedin.png" style = "width:20px;">
+                 Linkedin
+
+             </a>
+             
+             <br/>
+             <br/>
+             <div>
+                 @2025 All copyrights are reserved
+             </div>
+             </div>
+         </footer>
+
+
+
+
+                
+        </div>
+</section>
+
+{% endblock %}
+
