@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from application.app import app, db, login_manager
 from application.model import Users, Projects, Interest, Discussion
 
+
 def init_db():
     with app.app_context():
         db.create_all()
@@ -79,12 +80,18 @@ def logout():
 @app.route("/admin/home")
 @login_required
 def admin_home():
+    if not current_user.is_admin:
+        flash("Unauthorized access.", "danger")
+        return redirect(url_for("user_home"))
     return render_template("admin_home.html")
 
 
 @app.route("/admin/dashboard")
 @login_required
 def admin_dashboard():
+    if not current_user.is_admin:
+        flash("Unauthorized access.", "danger")
+        return redirect(url_for("user_home"))
     users = Users.query.all()
     return render_template("admin_dashboard.html", users = users)
 
@@ -92,6 +99,9 @@ def admin_dashboard():
 @app.route("/admin/about")
 @login_required
 def admin_about():
+    if not current_user.is_admin:
+        flash("Unauthorized access.", "danger")
+        return redirect(url_for("user_home"))
     return render_template("admin_about.html")
 
 @app.route("/admin/block_user/<int:user_id>", methods=["POST"])
@@ -214,6 +224,51 @@ def user_update(project_id):
 def user_about():
     user = current_user
     return render_template("user_about.html", user = user)
+
+@app.route("/interested", methods = [ "POST"])
+@login_required
+def interested():
+    user = current_user
+    project_id = request.form.get("project_id")
+    if not project_id:
+        flash("No project selected", "danger")
+        return redirect(url_for('user_dashboard'))
+
+    existing = Interest.query.filter_by(users_id=user.id, project_id=project_id).first()
+    if existing:
+        flash("You have already shown interest in this project.", "danger")
+        return redirect(url_for('user_dashboard'))
+    add_interest = Interest(users_id = user.id, project_id = project_id)
+    db.session.add(add_interest)
+    db.session.commit()
+    flash("Interest added successfully", "success")
+    return redirect(url_for('user_dashboard'))
+
+@app.route("/interested/show", methods = ["GET"])
+@login_required
+def interested_show():
+    user = current_user
+    interests = Interest.query.all()
+    print(len(interests)) 
+    interested = Interest.query.filter_by(users_id=user.id).all()
+    return render_template("interest.html", interested = interested)
+
+
+    
+
+
+
+
+
+
+
+
+    
+
+
+    
+    
+
 
 
 

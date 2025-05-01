@@ -2,22 +2,13 @@
 
 {% block title%}User dashboard{% endblock %}
 
+{% block head %}
+<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"></script>
+{% endblock %}
 {% block content %}
 
 <section class = "container-fluid">
     <div class = "container">
-        <div>
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                    {% for category, message in messages %}
-                        <div class="alert alert-{{ category }} alert-dismissible fade show mt-3" role="alert">
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-        </div>
         <div class="blurfle">
             <ul class = "nav justify-content-center nav-underline">
                 <li class = "nav-item py-2">
@@ -41,7 +32,7 @@
                         <b>
                             <img src = "/static/images/cyber.jpeg" style = "width:33px; border-radius:30px;">
                             
-                            <a href = "" style = "color: white;" class = "link"> Welcome, {{ user.name }}</a> </b>
+                            <a href = "" style = "color: white;" class = "link"> Welcome, </a> </b>
                            
                     </div>
 
@@ -50,36 +41,19 @@
             </ul>
         </div>
 
-        <div class = "row row-cols-3 m-4">
-            {% for project in projects %}
-                {% if project %}
-                    <div class = "col p-4">
-                        <div class = "border border-info rounded-4">
-                            <h1 class = "text-center p-4">{{ project.title }}</h1>
-                            <p class = "text-center p-4">{{ project.description }}</p>
-                            <p class = "text-center p-4">{{ project.skills }}</p>
-                            <div class ="text-center m-2">
-                                <form action="{{ url_for('interested') }}" method="POST">
-                                    <input type="hidden" name="project_id" value="{{ project.id }}">
-                                    <button type="submit" class="btn btn-primary">
-                                            I'm Interested
-                                    </button>
-                                </form>
-
-                                
-                            </div>
-                    
-                        
-                        </div>
-                    </div>
-                {% else %}
-                    <div class="col-12 text-center">
-                        <p>No Project Added</p>
-                    </div>
-                {% endif %}
-            {% endfor %}
+        <div>
+            
+    
         </div>
-        <br/><hr/>
+
+       
+
+
+
+       
+
+
+
 
         <footer >
             <div class = "text-center krindale p-3 m-3" >
@@ -105,4 +79,7 @@
 </section>
 
 
+
 {% endblock %}
+
+    
