@@ -54,13 +54,17 @@
                             <td>{{ user.email }}</td>
                             <td>{{ user.gender }}</td>
                             <td>
-                                {% if not user.is_blocked%}
-                                    <a href = "" class = "link btn btn-outline-primary">Block</a>
+                                
+                                    
+                                {% if user.is_blocked %}
+                                    <form action="{{ url_for('unblock_user', user_id=user.id) }}" method="post">
+                                        <button class = "btn btn-outline-primary" type="submit">Unblock</button>
+                                    </form>
                                 {% else %}
-                                    <p class = "text-danger">You are already blocked</p>
+                                    <form action="{{ url_for('block_user', user_id=user.id) }}" method="post">
+                                        <button class = "btn btn-outline-primary" type="submit">Block</button>
+                                    </form>
                                 {% endif %}
-
-                            
                             </td>
                         </tr>
                         {% endfor %}

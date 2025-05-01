@@ -35,6 +35,9 @@
                     <form method = "POST" action = "{{ url_for('signin') }}">
                         <label>Email</label><br>
                         <input class = "m-4 text-center box" type = "email" placeholder = "Email" name = "email" /><br>
+                        {% if error %}
+                            <p class = "text-danger">{{ error }}</p>
+                        {% endif %}
                         <label>Password</label><br>
                         <input class = "m-4 text-center box" type = "password" placeholder = "Password" name = "password"/><br>
                         <input class = "btn btn-outline-primary me-5" type = "submit" value = "Submit" >

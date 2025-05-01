@@ -54,6 +54,8 @@ def signin():
         password = request.form['password']
         user = Users.query.filter_by(email = email).first()
         if user and check_password_hash(user.password, password):
+            if user.is_blocked:
+                return render_template("signin.html", error = "User blocked by Admin!")
             login_user(user)
             flash("You logged successfully", "success")
             if user.is_admin:
@@ -91,6 +93,32 @@ def admin_dashboard():
 @login_required
 def admin_about():
     return render_template("admin_about.html")
+
+@app.route("/admin/block_user/<int:user_id>", methods=["POST"])
+@login_required
+def block_user(user_id):
+    if not current_user.is_admin:
+        flash("Unauthorized access.", "danger")
+        return redirect(url_for("signin"))
+
+    user = Users.query.get_or_404(user_id)
+    user.is_blocked = True
+    db.session.commit()
+    flash(f"User {user.name} has been blocked.", "success")
+    return redirect(url_for("admin_dashboard"))
+
+@app.route("/admin/unblock_user/<int:user_id>", methods=["POST"])
+@login_required
+def unblock_user(user_id):
+    if not current_user.is_admin:
+        flash("Unauthorized access.", "danger")
+        return redirect(url_for("user_home"))
+
+    user = Users.query.get_or_404(user_id)
+    user.is_blocked = False
+    db.session.commit()
+    flash(f"User {user.name} has been unblocked.", "success")
+    return redirect(url_for("admin_dashboard")) 
 
 
 
