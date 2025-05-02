@@ -31,10 +31,10 @@ Demo Video
 <pre>pip freeze</pre>
 
 <b>To run our application</b>
-<pre>python run.py</pre>
-<img src = "/static/images/homepage.png">
-<img src = "/static/images/project.png">
-<img src = "/static/images/Interested_project.png">
-<Img src = "/static/images/dashboard.png">
-<img src = "/static/images/add project.png">
+<pre>python run.py</pre><br/>
+<img src = "/static/images/homepage.png"><br/><br/>
+<img src = "/static/images/project.png"><br/>
+<img src = "/static/images/Interested_project.png"><br/>
+<Img src = "/static/images/dashboard.png"><br/>
+<img src = "/static/images/add project.png"><br/>
 
