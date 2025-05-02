@@ -32,6 +32,13 @@ Demo Video
 
 <b>To run our application</b>
 <pre>python run.py</pre><br/>
+
+<b>Admin email and Password</b>
+<b>Email</b>
+<pre>admin@gmail.com</pre>
+<b>Password</b>
+<pre>admin</pre>
+<br>
 <img src = "/static/images/homepage.png"><br/><br/>
 <img src = "/static/images/project.png"><br/>
 <img src = "/static/images/Interested_project.png"><br/>
